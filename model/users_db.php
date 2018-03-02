@@ -1,5 +1,5 @@
 <?php
-class user{
+class User {
   private $id;
   private $name;
   private $phone;
@@ -30,10 +30,10 @@ class user{
   public function setRoles($value){$this->roles = $value;}
 }
 
-class users_db{
+class UserDb extends Database {
 
     public static function getAllUsers(){
-      $db=Database::getDB();
+      $db=self::getDB();
       $query='SELECT * FROM users ORDER BY email DESC';
       $statement=$db->prepare($query);
       $statement->execute();
@@ -52,7 +52,7 @@ class users_db{
     }
 
     public static function loginUser($email, $password){
-      $db=Database::getDB();//open connection database
+      $db=self::getDB();//open connection database
       $query = 'SELECT * FROM users
                 WHERE email = :email and password = :password';
       $statement = $db->prepare($query);
@@ -74,7 +74,7 @@ class users_db{
     } 
 
     public static function addUser($name,$phone,$email, $password,$roles){
-      $db=Database::getDB();
+      $db=self::getDB();
       $query='INSERT INTO users (name,phone,email,password,roles) VALUES (:name,:phone,:email, :password, :roles)';
       $statement = $db->prepare($query);
       $statement ->bindValue(':name',$name);
@@ -87,7 +87,7 @@ class users_db{
     }
 
     public static function updateUser($id,$name,$phone,$email,$password,$roles){
-      $db=Database::getDB();
+      $db=self::getDB();
       $query='UPDATE users 
             SET name = :name, phone = :phone, email = :email, password = :password, roles= :roles WHERE id = :id';
       $statement = $db->prepare($query);
@@ -102,7 +102,7 @@ class users_db{
     }
 
     public static function deleteUser($id){
-      $db=Database::getDB();
+      $db=self::getDB();
       $query = 'DELETE FROM users WHERE id=:id';
       $statement = $db-> prepare($query);
       $statement->bindValue(':id',$id);
@@ -111,7 +111,7 @@ class users_db{
     }
 
     public static function FindUser($id){
-      $db=Database::getDB();
+      $db=self::getDB();
       $query = 'SELECT * FROM users WHERE id=:id';
       $statement = $db->prepare($query);
       $statement->bindValue(':id',$id);

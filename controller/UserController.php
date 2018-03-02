@@ -13,17 +13,17 @@
 		case 'login':
 					$email = filter_input(INPUT_POST, 'email');
 					$password = filter_input(INPUT_POST, 'password');
-					$users = users_db::loginUser($email,$password);
+					$users = UserDb::loginUser($email,$password);
 					if(count($users)>0){
 						foreach ($users as $value) {
 							$_SESSION['idUser']=$value->getId();
-							$us = users_db::FindUser($value->getId());
+							$us = UserDb::FindUser($value->getId());
 							if($us->getRoles()=='customer')
 							{
 								include('../view/userInformation.php');	
 								break;							
 							}
-							$users = users_db::getAllUsers();
+							$users = UserDb::getAllUsers();
 							include('../view/listUser.php');
 						}
 					}

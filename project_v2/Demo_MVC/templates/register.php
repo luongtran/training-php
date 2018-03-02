@@ -3,19 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Registration system PHP and MySQL</title>
-	<link rel="stylesheet" type="text/css" href="../style.css">
+	<link rel="stylesheet" type="text/css" href="../Demo_MVC/public/css/style.css">
 </head>
 <body>
 	<div class="header">
 		<h2>Register</h2>
 	</div>
 	
-	<form class="register" method="post" action="#">
-
-		<?php 
-			if (!empty($errors))
-			include('../view/errors.php'); 
-		?>
+	<form class="register" method="post" action="?controller=UsersController&action=doAdd">
 		
 		<div class="input-group">
 			<label>Name</label>
