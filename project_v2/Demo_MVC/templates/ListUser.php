@@ -1,18 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" type="text/css" href="../Demo_MVC/public/css/style.css">
-</head>
+<?php include('header.php'); ?>
 <body>
 	<div class="header_list">
 		<h2>List Of Users</h2>
-	<form  method='post' action="?controller=UsersController&action=logout" name="frm_logout" style="float:right;">
+	<form  method='post' action="<?php echo base_url(); ?>/UsersController/logout" name="frm_logout" style="float:right;">
 			Hello : <?php echo Session::get('name');  ?><button type="submit" name="action" value="logout">Logout</button>
 	</form>
 	<div class="input-group">
-			<a href="?controller=UsersController&action=formAdd">Add</a>
+			<a href="<?php echo base_url(); ?>/UsersController/formAdd">Add</a>
 	</div>
 	</div>
 	<table class="list_user">
@@ -35,8 +29,8 @@
 			<td><?php echo $value['email']; ?></td>
 			<td><?php echo $value['roles']; ?></td>
 			<?php if(Session::get('role')=='admin') { ?>
-			<td><a href="?controller=UsersController&action=edit&id=<?php echo $value['id']; ?>">Edit</a> </td>
-			<td><a href="?controller=UsersController&action=delete&id=<?php echo $value['id']; ?>" onclick="return xacnhan('Bạn đã chắc chắn muốn xóa')">Delete</a></td>
+			<td><a href="<?php echo base_url(); ?>/UsersController/edit/<?php echo $value['id']; ?>">Edit</a> </td>
+			<td><a href="<?php echo base_url(); ?>/UsersController/delete/<?php echo $value['id']; ?>" onclick="return xacnhan('Bạn đã chắc chắn muốn xóa')">Delete</a></td>
 			
 			</tr>
 			<?php 

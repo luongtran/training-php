@@ -5,12 +5,11 @@ require_once('../Demo_MVC/libs/Session.php');
 class UsersController {
 
 	public function getUsers() {
-		Session::init();
 		$logged = Session::get('loggedIn');
 		if($logged==false)
 		{
 			Session::destroy();
-			header('location: ?controller=UsersController&action=index');
+			header('location: ' . base_url() . '/UsersController/index');
 			exit;
 		}
 		$users = UserModel::getUser();
@@ -28,12 +27,11 @@ class UsersController {
 
 	public function formAdd()
 	{
-		Session::init();
 		$logged = Session::get('loggedIn');
 		if($logged==false)
 		{
 			Session::destroy();
-			header('location: ?controller=UsersController&action=index');
+			header('location: ' . base_url() . '/UsersController/index');
 			exit;		
 		}
 		else{
@@ -45,10 +43,9 @@ class UsersController {
 
 	public function edit()
 	{
-		Session::init();
 		if(Session::get('role')!='admin' || Session::get('loggedIn')==false)
 		{
-			header('location: ?controller=UsersController&action=getUsers');
+			header('location: '. base_url() .'/UsersController/getUsers');
 			exit;
 		}
 		else
@@ -62,17 +59,16 @@ class UsersController {
 
 	public function delete()
 	{
-		Session::init();
 		if(Session::get('role')!='admin' || Session::get('loggedIn')==false)
 		{
-			header('location: ?controller=UsersController&action=getUsers');
+			header('location: '. base_url() .'/UsersController/getUsers');
 			exit;
 		}
 		else
 		{
 			if(isset($_GET['id'])) {
 		  		UserModel::deleteById($_GET['id']);
-		 		header('location: ?controller=UsersController&action=getUsers');
+		 		header('location: '. base_url() .'/UsersController/getUsers');
 		 	}
 			else
 			{
@@ -91,14 +87,14 @@ class UsersController {
 			$data = UserModel::login($email,$password);
 			if(is_array($data) == true)
 			{
-				Session::init();
 				Session::set('loggedIn',true);
 				Session::set('role',$data['roles']);
 				Session::set('name',$data['name']);
-				header('location: ?controller=UsersController&action=getUsers');
+				header('location: ' . base_url() . '/UsersController/getUsers');
 			}
 			else {
-				header('location: ?controller=UsersController&action=index');
+				Session::set('error',"Tai khoan khong dung");
+				header('location: ' . base_url() . '/UsersController/index');
 			}
 		}
 		else
@@ -125,20 +121,18 @@ class UsersController {
 		);
 
 		$user = UserModel::insertUser($date);
-		header('location: ?controller=UsersController&action=getUsers');
+		header('location: '. base_url() .'/UsersController/getUsers');
 	}
 
 	public function logout()
 	{
-		session::init();
 		Session::destroy();
-		header('location: ?controller=UsersController&action=index');
+		header('location: ' . base_url() . '/UsersController/index');
 		exit;
 	}
 
 	public function update()
 	{
-		session::init();
 		$name = $_POST['name'];
 		$phone = $_POST['phone'];
 		$email = $_POST['email'];
@@ -157,13 +151,13 @@ class UsersController {
 
 		if(Session::get('role')!='admin' || Session::get('loggedIn')==false)
 		{
-			header('location: ?controller=UsersController&action=getUsers');
+			header('location: '. base_url() .'/UsersController/getUsers');
 			exit;
 		}
 		else
 		{
 			$user = UserModel::updateUserById($data);
-			header('location: ?controller=UsersController&action=getUsers');
+			header('location: '. base_url() .'/UsersController/getUsers');
 		}		
 	}
 }

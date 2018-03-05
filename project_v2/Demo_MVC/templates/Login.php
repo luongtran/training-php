@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Login</title>
-	<link rel="stylesheet" type="text/css" href="../Demo_MVC/public/css/style.css">
-</head>
+<?php include('header.php'); ?>
 
 <body>
 		<div class="header">
 			<h2>Login to the system</h2>		
+			<?php if(isset($_SESSION['error'])) {
+				echo $_SESSION['error'];
+				unset($_SESSION['error']);
+			} ?>
 		</div>
-
-		<form class="login" method = "post" action="?controller=UsersController&action=login">
+		<form class="login" method = "post" action="<?php echo base_url(); ?>/UsersController/login">
 			
 			<div class="input-group">
 				<label> Email</label>

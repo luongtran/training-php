@@ -1,16 +1,20 @@
 
-<?php 
-require_once('../Demo_MVC/config/database.php');
+<?php
+// echo  $_GET['controller'];
+// echo $_GET['action'];
+require_once('./libs/helper.php');
+require_once('./config/database.php');
+require_once('./libs/Session.php');
+Session::init();
+
 if(isset($_GET['controller'],$_GET['action'])) {
 	$controller = $_GET['controller'];
 	$action = $_GET['action'];
 }else {
 	$controller = 'UsersController';
-	$action = 'index';
-	
+	$action = 'index';	
 }
+
 require_once('../Demo_MVC/controllers/'.$controller .'.php');	
-	$controller = new $controller();
-	$controller->$action();
-
-
+$url = new $controller;
+$url->$action();

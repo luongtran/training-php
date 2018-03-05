@@ -1,17 +1,10 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Registration system PHP and MySQL</title>
-	<link rel="stylesheet" type="text/css" href="../Demo_MVC/public/css/style.css">
-</head>
+<?php include('header.php'); ?>
 <body>
 	<div class="header">
 		<h2>Register</h2>
 	</div>
 	
-	<form class="register" method="post" action="?controller=UsersController&action=update">
+	<form class="register" method="post" action="<?php echo base_url(); ?>/UsersController/update">
 		
 		<div class="input-group">
 			<label>Name</label>

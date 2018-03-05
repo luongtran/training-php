@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<title>Registration system PHP and MySQL</title>
-	<link rel="stylesheet" type="text/css" href="../Demo_MVC/public/css/style.css">
-</head>
+<?php include('header.php'); ?>
 <body>
 	<div class="header">
 		<h2>Register</h2>
